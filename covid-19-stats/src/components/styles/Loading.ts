@@ -2,14 +2,24 @@ import styled from '@emotion/styled';
 
 // CSS-loaders | Copyright (c) 2014 Luke Haas | MIT license
 // https://github.com/lukehaas/css-loaders
-export const StyledLoading = styled.div`
+export const StyledLoading = styled.div<{ isCentered?: boolean }>`
   position: relative;
   width: 10em;
   height: 10em;
   margin: 55px auto;
-  color: currentColor;
+  color: #aaa;
   box-shadow: inset 0 0 0 1em;
   transform: translateZ(0);
+
+  ${({ isCentered }) =>
+    isCentered &&
+    `
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  `}
+
   &,
   &::before,
   &::after {

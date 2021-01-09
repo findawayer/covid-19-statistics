@@ -1,15 +1,15 @@
 import type { FunctionComponent } from 'react';
 import React from 'react';
 
-// import Dump from '../components/Dump';
 import { useFetch } from '../hooks/useFetch';
 import { useTabularData } from '../hooks/useTabularData';
 import DataTable from './DataTable';
-import Search from './Search';
 import Loading from './Loading';
+import Search from './Search';
 import {
   StyledCovidStatHeader,
-  StyledCovidStatTitle
+  StyledCovidStatTitle,
+  StyledCovidStatBody
 } from './styles/CovidStatistics';
 
 const API_ALL_COUNTRY = 'https://covid19-api.com/country/all';
@@ -35,10 +35,11 @@ const columns = [
   { key: 'deaths', alias: '사망자' }
 ];
 
-interface CovidStatTableProps {}
-
-const CovidStatTable: FunctionComponent<CovidStatTableProps> = () => {
-  const { data, loading, error } = useFetch<CountryData[]>(API_ALL_COUNTRY);
+const CovidStatTable: FunctionComponent = () => {
+  const { data, loading, error } = useFetch<CountryData[]>(
+    API_ALL_COUNTRY,
+    { cacheKey: 'covid19-country-all', cacheMaxAge: 60 * 60 * 1000 } // 1 hour cache
+  );
   const {
     processedData,
     handleColumnClick,
@@ -49,9 +50,18 @@ const CovidStatTable: FunctionComponent<CovidStatTableProps> = () => {
     sortDirection: 'ascending'
   });
 
-  if (loading) return <Loading />;
-  if (!data) return <p>No data!</p>;
-  if (error) return <p>{error.message}</p>;
+  const renderTable = () => {
+    if (loading) return <Loading isCentered />;
+    if (error) return <p>{error.message}</p>;
+    if (!data) return <p>No data!</p>;
+    return (
+      <DataTable
+        data={processedData}
+        columns={columns}
+        handleColumnClick={handleColumnClick}
+      />
+    );
+  };
 
   return (
     <>
@@ -59,11 +69,7 @@ const CovidStatTable: FunctionComponent<CovidStatTableProps> = () => {
         <StyledCovidStatTitle>코로나 바이러스 세계 현황</StyledCovidStatTitle>
         <Search handleChange={handleKeywordChange} />
       </StyledCovidStatHeader>
-      <DataTable
-        data={processedData}
-        columns={columns}
-        handleColumnClick={handleColumnClick}
-      />
+      <StyledCovidStatBody>{renderTable()}</StyledCovidStatBody>
     </>
   );
 };

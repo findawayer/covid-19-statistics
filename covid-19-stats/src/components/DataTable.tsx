@@ -3,11 +3,11 @@ import React from 'react';
 
 import { formatValue } from '../utils';
 import {
-  StyledTable,
+  StyledBody,
   StyledCell,
-  StyledHeadCell,
   StyledHead,
-  StyledBody
+  StyledHeadCell,
+  StyledTable
 } from './styles/DataTable';
 
 type ColumnDefinition = {

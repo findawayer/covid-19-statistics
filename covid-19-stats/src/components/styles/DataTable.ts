@@ -2,10 +2,6 @@ import styled from '@emotion/styled';
 
 export const StyledTable = styled.div`
   position: relative;
-  max-height: 35em;
-  margin-bottom: -1px;
-  overflow: auto;
-  border-bottom: 1px solid #ccc;
 `;
 
 export const StyledCell = styled.div`
@@ -38,10 +34,4 @@ export const StyledHead = styled(StyledRowGroup)`
 
 export const StyledBody = styled(StyledRowGroup)`
   margin-top: -1px;
-
-  ${StyledCell} {
-    &:nth-last-child(-n + 5) {
-      border-bottom-width: 0;
-    }
-  }
 `;
