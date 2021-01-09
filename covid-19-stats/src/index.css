@@ -1,2 +1,16 @@
 /* Use normalize.css (packaged in CRA) as reset */
 @import-normalize;
+
+body {
+  margin: 20px;
+  font-family: 'Noto Serif KR', serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+button,
+input {
+  font-family: inherit;
+  font-size: inherit;
+}

@@ -1,41 +1,14 @@
-import styled from '@emotion/styled';
 import type { FunctionComponent, MouseEvent, TouchEvent } from 'react';
 import React from 'react';
 
-const StyledTable = styled.div`
-  position: relative;
-  max-height: 35em;
-  overflow: auto;
-`;
-
-const StyledRowGroup = styled.div`
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  box-sizing: border-box;
-  background: #fff;
-  border: solid currentColor;
-  border-width: 1px 1px 0 0;
-`;
-
-const StyledHead = styled(StyledRowGroup)`
-  position: sticky;
-  top: 0;
-`;
-
-const StyledBody = styled(StyledRowGroup)`
-  margin-top: -1px;
-`;
-
-const StyledCell = styled.div`
-  padding: 1em;
-  border: solid currentColor;
-  border-width: 0 0 1px 1px;
-`;
-
-const StyledHeadCell = styled(StyledCell)`
-  font-weight: 500;
-  cursor: pointer;
-`;
+import { formatValue } from '../utils';
+import {
+  StyledTable,
+  StyledCell,
+  StyledHeadCell,
+  StyledHead,
+  StyledBody
+} from './styles/DataTable';
 
 type ColumnDefinition = {
   key: string;
@@ -56,7 +29,7 @@ const DataTableRow: FunctionComponent<DataTableRowProps> = ({
   return (
     <>
       {columns.map(({ key }) => (
-        <StyledCell key={key}>{item[key]}</StyledCell>
+        <StyledCell key={key}>{formatValue(item[key])}</StyledCell>
       ))}
     </>
   );

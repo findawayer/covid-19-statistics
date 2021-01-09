@@ -6,7 +6,11 @@ import { useFetch } from '../hooks/useFetch';
 import { useTabularData } from '../hooks/useTabularData';
 import DataTable from './DataTable';
 import Search from './Search';
-import Throbber from './Throbber';
+import Loading from './Loading';
+import {
+  StyledCovidStatHeader,
+  StyledCovidStatTitle
+} from './styles/CovidStatistics';
 
 const API_ALL_COUNTRY = 'https://covid19-api.com/country/all';
 
@@ -39,23 +43,28 @@ const CovidStatTable: FunctionComponent<CovidStatTableProps> = () => {
     processedData,
     handleColumnClick,
     handleKeywordChange
-  } = useTabularData(data, { filterKey: 'country' });
+  } = useTabularData(data, {
+    filterKey: 'country',
+    sortKey: 'country',
+    sortDirection: 'ascending'
+  });
 
-  if (loading) return <Throbber />;
+  if (loading) return <Loading />;
   if (!data) return <p>No data!</p>;
   if (error) return <p>{error.message}</p>;
 
   return (
-    <div>
-      <div>
+    <>
+      <StyledCovidStatHeader>
+        <StyledCovidStatTitle>코로나 바이러스 세계 현황</StyledCovidStatTitle>
         <Search handleChange={handleKeywordChange} />
-      </div>
+      </StyledCovidStatHeader>
       <DataTable
         data={processedData}
         columns={columns}
         handleColumnClick={handleColumnClick}
       />
-    </div>
+    </>
   );
 };
 

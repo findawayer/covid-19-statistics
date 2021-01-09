@@ -21,13 +21,14 @@ const DEFAULT_SORT_DIRECTION: SortDirection = 'descending';
 /** Tabular data */
 export const useTabularData = (
   rowData: Record<string, TODO>[] | null,
-  options: { filterKey?: string } = {}
+  options: Partial<DataOptions> = {}
 ) => {
   const [dataOptions, setDataOptions] = useState<DataOptions>({
-    filterKey: options.filterKey || null,
+    filterKey: null,
     filterKeyword: null,
     sortKey: null,
-    sortDirection: DEFAULT_SORT_DIRECTION
+    sortDirection: DEFAULT_SORT_DIRECTION,
+    ...options
   });
 
   /** Processed table data (sorted, filtered and memoized.) */

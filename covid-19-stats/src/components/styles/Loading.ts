@@ -1,10 +1,8 @@
-import type { FunctionComponent } from 'react';
-import React from 'react';
 import styled from '@emotion/styled';
 
 // CSS-loaders | Copyright (c) 2014 Luke Haas | MIT license
 // https://github.com/lukehaas/css-loaders
-const StyledThrobber = styled.div`
+export const StyledLoading = styled.div`
   position: relative;
   width: 10em;
   height: 10em;
@@ -52,9 +50,3 @@ const StyledThrobber = styled.div`
     }
   }
 `;
-
-const Throbber: FunctionComponent = () => (
-  <StyledThrobber role="presentation" aria-label="Loading" />
-);
-
-export default Throbber;

@@ -19,16 +19,19 @@
     "web-vitals": "^0.2.4"
   },
   "devDependencies": {
+    "@emotion/babel-plugin": "^11.1.2",
     "cross-env": "^7.0.3",
+    "customize-cra": "^1.0.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-prettier": "^3.3.1",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "react-app-rewired": "^2.1.8"
   },
   "scripts": {
-    "start": "cross-env BROWSER=none react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "cross-env BROWSER=none react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
     "format": "prettier --write .",
     "lint": "eslint --ext .js,.ts,.tsx ."
   },

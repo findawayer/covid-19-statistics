@@ -1,10 +1,10 @@
 import type { FunctionComponent } from 'react';
 import React from 'react';
 
-import CovidStatTable from './components/CovidStatTable';
+import CovidStatistics from './components/CovidStatistics';
 
 const App: FunctionComponent = () => {
-  return <CovidStatTable />;
+  return <CovidStatistics />;
 };
 
 export default App;
