@@ -2,13 +2,28 @@ import styled from '@emotion/styled';
 import type { FunctionComponent, MouseEvent, TouchEvent } from 'react';
 import React from 'react';
 
-import { useSortableTable } from '../hooks/useSortableTable';
-
 const StyledTable = styled.div`
+  position: relative;
+  max-height: 35em;
+  overflow: auto;
+`;
+
+const StyledRowGroup = styled.div`
   display: grid;
   grid-template-columns: repeat(5, 1fr);
+  box-sizing: border-box;
+  background: #fff;
   border: solid currentColor;
   border-width: 1px 1px 0 0;
+`;
+
+const StyledHead = styled(StyledRowGroup)`
+  position: sticky;
+  top: 0;
+`;
+
+const StyledBody = styled(StyledRowGroup)`
+  margin-top: -1px;
 `;
 
 const StyledCell = styled.div`
@@ -24,28 +39,10 @@ const StyledHeadCell = styled(StyledCell)`
 
 type ColumnDefinition = {
   key: string;
-  name: string;
+  alias: string;
 };
 
-interface DataTableHeadingProps {
-  columns: readonly ColumnDefinition[];
-  handleClick: (key: string) => (event: MouseEvent | TouchEvent) => void;
-}
-
-const DataTableHeading: FunctionComponent<DataTableHeadingProps> = ({
-  columns,
-  handleClick
-}) => {
-  return (
-    <>
-      {columns.map(({ key, name }) => (
-        <StyledHeadCell key={key} onClick={handleClick(key)}>
-          {name}
-        </StyledHeadCell>
-      ))}
-    </>
-  );
-};
+// Row --------------------
 
 interface DataTableRowProps {
   item: TODO;
@@ -65,20 +62,39 @@ const DataTableRow: FunctionComponent<DataTableRowProps> = ({
   );
 };
 
+// Table --------------------
+
 interface DataTableProps {
-  data: TODO[];
+  data: TODO[] | null;
   columns: readonly ColumnDefinition[];
+  handleColumnClick?: (
+    sortKey: string
+  ) => (event: MouseEvent | TouchEvent) => void;
 }
 
-const DataTable: FunctionComponent<DataTableProps> = ({ data, columns }) => {
-  const { sortedData, handleColumnClick } = useSortableTable(data);
-
+const DataTable: FunctionComponent<DataTableProps> = ({
+  data,
+  columns,
+  handleColumnClick
+}) => {
   return (
     <StyledTable>
-      <DataTableHeading columns={columns} handleClick={handleColumnClick} />
-      {sortedData.map(item => (
-        <DataTableRow key={item.country} item={item} columns={columns} />
-      ))}
+      <StyledHead>
+        {columns.map(({ key, alias }) => (
+          <StyledHeadCell
+            key={key}
+            onClick={handleColumnClick ? handleColumnClick(key) : undefined}
+          >
+            {alias ?? key}
+          </StyledHeadCell>
+        ))}
+      </StyledHead>
+      <StyledBody>
+        {data &&
+          data.map(item => (
+            <DataTableRow key={item.country} item={item} columns={columns} />
+          ))}
+      </StyledBody>
     </StyledTable>
   );
 };

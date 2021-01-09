@@ -1,12 +1,15 @@
 import { useEffect, useReducer } from 'react';
 
-type JsonData = Record<string, unknown> | Record<string, unknown>[];
+/** Type of data that can be fetched from a JSON response. */
+type JsonValue = 'string' | 'number' | 'boolean' | null;
+
+/** Shallow schema of any JSON data. */
+type JsonData = Record<string | number, JsonValue> | JsonValue[];
 
 type FetchResult<T extends JsonData> = {
   data: T | null;
   error: Error | null;
   loading: boolean;
-  called: boolean;
 };
 
 type Action<T extends JsonData> =
@@ -17,8 +20,7 @@ type Action<T extends JsonData> =
 const initialResult: FetchResult<JsonData> = {
   data: null,
   error: null,
-  loading: false,
-  called: false
+  loading: false
 };
 
 const fetchResultReducer = <T extends JsonData>(
@@ -27,7 +29,7 @@ const fetchResultReducer = <T extends JsonData>(
 ): FetchResult<T> => {
   switch (action.type) {
     case 'setLoading':
-      return { ...status, loading: true, error: null, called: true };
+      return { ...status, loading: true, error: null };
 
     case 'setError':
       return { ...status, loading: false, error: action.payload };
@@ -48,7 +50,7 @@ const fetchResultReducer = <T extends JsonData>(
  * @todo Correct type capturing :)
  */
 export const useFetch = <T>(uri: string) => {
-  const [{ data, error, loading, called }, dispatch] = useReducer(
+  const [{ data, error, loading }, dispatch] = useReducer(
     fetchResultReducer,
     initialResult
   );
@@ -73,5 +75,5 @@ export const useFetch = <T>(uri: string) => {
     getData();
   }, [dispatch, uri]);
 
-  return { data: data as T | null, error, loading, called };
+  return { data: data as T | null, error, loading };
 };
