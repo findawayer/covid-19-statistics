@@ -1,6 +1,7 @@
 import type { ChangeEvent, MouseEvent, TouchEvent } from 'react';
 import { useMemo, useState } from 'react';
 
+import { DEFAULT_SORT_DIRECTION } from '../config/data-table';
 import { isNumber } from '../utils';
 
 type SortDirection = 'ascending' | 'descending';
@@ -15,8 +16,6 @@ type DataOptions = {
   /** Direction of data sorting. */
   sortDirection: SortDirection;
 };
-
-const DEFAULT_SORT_DIRECTION: SortDirection = 'descending';
 
 /** Tabular data */
 export const useTabularData = (

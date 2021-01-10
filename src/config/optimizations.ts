@@ -1,0 +1,1 @@
+export const DEFAULT_FUNCTION_CALL_RATE_LIMIT = 100;

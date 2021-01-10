@@ -1,32 +1,19 @@
 import type { FunctionComponent } from 'react';
 import React from 'react';
 
+import { API_COVID_19_ALL_COUNTRY } from '../config/api';
 import { useFetch } from '../hooks/useFetch';
 import { useTabularData } from '../hooks/useTabularData';
+import type { CountryData } from '../models/covid-19-api';
 import DataTable from './DataTable';
 import Loading from './Loading';
 import Search from './Search';
 import {
-  StyledCovidStatHeader,
-  StyledCovidStatTitle,
   StyledCovidStatBody,
+  StyledCovidStatHeader,
   StyledCovidStatScroll,
+  StyledCovidStatTitle,
 } from './styles/CovidStatistics';
-
-const API_ALL_COUNTRY = 'https://covid19-api.com/country/all';
-
-type CountryData = {
-  country: string;
-  code: string;
-  confirmed: number;
-  recovered: number;
-  critical: number;
-  deaths: number;
-  latitude: number;
-  longitude: number;
-  lastChange: string; // Date string
-  lastUpdate: string; // Date string
-};
 
 const columns = [
   { key: 'country', alias: '국가' },
@@ -38,7 +25,7 @@ const columns = [
 
 const CovidStatTable: FunctionComponent = () => {
   const { data, loading, error } = useFetch<CountryData[]>(
-    API_ALL_COUNTRY,
+    API_COVID_19_ALL_COUNTRY,
     { cacheKey: 'covid19-country-all', cacheMaxAge: 60 * 60 * 1000 }, // 1 hour cache
   );
   const {

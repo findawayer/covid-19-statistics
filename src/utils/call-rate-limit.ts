@@ -1,4 +1,4 @@
-const DEFAULT_FUNCTION_CALL_RATE_LIMIT = 100;
+import { DEFAULT_FUNCTION_CALL_RATE_LIMIT } from '../config/optimizations';
 
 export function throttle(
   fn: (...args: any[]) => void,
