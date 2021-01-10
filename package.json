@@ -1,9 +1,9 @@
 {
-  "name": "covid-19-stats",
+  "name": "covid-19-statistics",
   "version": "0.1.0",
   "description": "COVID 19 statistics visualized.",
-  "homepage": "https://findawayer.github.io/covid-19-stats",
-  "license": "MIT",
+  "homepage": "https://findawayer.github.io/covid-19-statistics",
+  "license": "GPL-3.0-or-later",
   "author": "Tae Sung Lim <findawayer@gmail.com>",
   "scripts": {
     "start": "cross-env BROWSER=none react-app-rewired start",
