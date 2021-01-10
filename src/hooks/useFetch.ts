@@ -26,7 +26,6 @@ const initialResult: FetchResult = {
 
 /** Action for fetchResultReducer */
 type Action =
-  | { type: 'setLoading' }
   | { type: 'setError'; payload: Error }
   | { type: 'setData'; payload: JsonData };
 

@@ -1,5 +1,5 @@
 import type { FunctionComponent } from 'react';
-import React from 'react';
+import React, { memo } from 'react';
 
 import { StyledLoading } from './styles/Loading';
 
@@ -18,9 +18,9 @@ const Loading: FunctionComponent<LoadingProps> = ({ size = 64 }) => {
         xmlns="http://www.w3.org/2000/svg"
         stroke="#3498DB"
       >
-        <g fill="none" fill-rule="evenodd">
-          <g transform="translate(1 1)" stroke-width="2">
-            <circle stroke-opacity=".5" cx="18" cy="18" r="18" />
+        <g fill="none" fillRule="evenodd">
+          <g transform="translate(1 1)" strokeWidth="2">
+            <circle strokeOpacity=".5" cx="18" cy="18" r="18" />
             <path d="M36 18c0-9.94-8.06-18-18-18">
               <animateTransform
                 attributeName="transform"
@@ -38,4 +38,4 @@ const Loading: FunctionComponent<LoadingProps> = ({ size = 64 }) => {
   );
 };
 
-export default Loading;
+export default memo(Loading);

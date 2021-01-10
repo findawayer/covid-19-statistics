@@ -6,6 +6,7 @@ import { isNumber } from '../utils';
 
 type SortDirection = 'ascending' | 'descending';
 
+/** Core options for the tabular data. */
 type DataOptions = {
   /** Name of column to use for data filtering. */
   filterKey: string | null;
@@ -17,18 +18,23 @@ type DataOptions = {
   sortDirection: SortDirection;
 };
 
-/** Tabular data */
+/** Create initial data options. */
+const initializeOptions = (overrides: Partial<DataOptions> = {}) => ({
+  filterKey: null,
+  filterKeyword: null,
+  sortKey: null,
+  sortDirection: DEFAULT_SORT_DIRECTION,
+  ...overrides,
+});
+
+/** Tabular data processor hook. */
 export const useTabularData = (
   rowData: Record<string, TODO>[] | null,
-  options: Partial<DataOptions> = {},
+  options?: Partial<DataOptions>,
 ) => {
-  const [dataOptions, setDataOptions] = useState<DataOptions>({
-    filterKey: null,
-    filterKeyword: null,
-    sortKey: null,
-    sortDirection: DEFAULT_SORT_DIRECTION,
-    ...options,
-  });
+  const [dataOptions, setDataOptions] = useState<DataOptions>(
+    initializeOptions(options),
+  );
 
   /** Processed table data (sorted, filtered and memoized.) */
   const processedData = useMemo(() => {
@@ -51,14 +57,16 @@ export const useTabularData = (
   ) => {
     // Just in case the heading is an interactive element, e.g. <a />
     event.preventDefault();
-
+    // Update options.
     setDataOptions(previousOptions => {
+      // Same sort key -> toggle sort direction
       if (previousOptions.sortKey === sortKey) {
         return {
           ...previousOptions,
           sortDirection: flipDirection(previousOptions.sortDirection),
         };
       }
+      // Different sort key ->
       return {
         ...previousOptions,
         sortKey,
@@ -69,11 +77,9 @@ export const useTabularData = (
 
   /** Filter data on clicking on column headings. */
   const handleKeywordChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-
     setDataOptions(previousOptions => ({
       ...previousOptions,
-      filterKeyword: value || null,
+      filterKeyword: event.target.value || null,
     }));
   };
 
@@ -85,10 +91,12 @@ export const useTabularData = (
   };
 };
 
+/** Invert direction of sorting. */
 function flipDirection(direction: SortDirection): SortDirection {
   return direction === 'ascending' ? 'descending' : 'ascending';
 }
 
+/** Filter data based on `filterKey` and `filterKeyword` option provided. */
 function filterData<T extends Record<string, unknown>>(
   data: T[],
   options: Pick<DataOptions, 'filterKey' | 'filterKeyword'>,
@@ -102,6 +110,7 @@ function filterData<T extends Record<string, unknown>>(
   return data.filter(item => matchesPattern(item[filterKey]));
 }
 
+/** Sort data based on `sortKey` and `sortDirection` option provided. */
 function sortData<T extends Record<string, unknown>>(
   data: T[],
   options: Pick<DataOptions, 'sortKey' | 'sortDirection'>,
@@ -122,10 +131,12 @@ function sortData<T extends Record<string, unknown>>(
   });
 }
 
+/** Sort comparator for numeric data. */
 function compareNumericData(a: number, z: number, reverse = false) {
   return reverse ? z - a : a - z;
 }
 
+/** Sort comparator for non-numeric data. */
 function compareNonNumericData(a: unknown, z: unknown, reverse = false) {
   return reverse
     ? String(z).localeCompare(String(a))
