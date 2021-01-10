@@ -1,7 +1,32 @@
 {
   "name": "covid-19-stats",
   "version": "0.1.0",
-  "private": true,
+  "description": "COVID 19 statistics visualized.",
+  "homepage": "https://findawayer.github.io/covid-19-stats",
+  "license": "MIT",
+  "author": "Tae Sung Lim <findawayer@gmail.com>",
+  "scripts": {
+    "start": "cross-env BROWSER=none react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test",
+    "eject": "react-app-rewired eject",
+    "lint": "eslint --ext .js,.ts,.tsx .",
+    "predeploy": "yarn build",
+    "deploy": "gh-pages -d build"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts,tsx}": [
+      "eslint --fix ."
+    ],
+    "*.{json,md}": [
+      "prettier --write ."
+    ]
+  },
   "dependencies": {
     "@emotion/react": "^11.1.4",
     "@emotion/styled": "^11.0.0",
@@ -24,22 +49,30 @@
     "customize-cra": "^1.0.0",
     "eslint-config-prettier": "^7.1.0",
     "eslint-plugin-prettier": "^3.3.1",
+    "gh-pages": "^3.1.0",
+    "husky": "^4.3.7",
+    "lint-staged": "^10.5.3",
     "prettier": "^2.2.1",
     "react-app-rewired": "^2.1.8"
-  },
-  "scripts": {
-    "start": "cross-env BROWSER=none react-app-rewired start",
-    "build": "react-app-rewired build",
-    "test": "react-app-rewired test",
-    "eject": "react-app-rewired eject",
-    "format": "prettier --write .",
-    "lint": "eslint --ext .js,.ts,.tsx ."
   },
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest"
+      "react-app/jest",
+      "plugin:prettier/recommended"
     ]
+  },
+  "prettier": {
+    "printWidth": 80,
+    "tabWidth": 2,
+    "useTabs": false,
+    "semi": true,
+    "singleQuote": true,
+    "quoteProps": "as-needed",
+    "trailingComma": "all",
+    "bracketSpacing": true,
+    "arrowParens": "avoid",
+    "proseWrap": "preserve"
   },
   "browserslist": {
     "production": [
