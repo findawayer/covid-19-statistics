@@ -7,7 +7,7 @@ import {
   StyledCell,
   StyledHead,
   StyledHeadCell,
-  StyledTable
+  StyledTable,
 } from './styles/DataTable';
 
 type ColumnDefinition = {
@@ -24,7 +24,7 @@ interface DataTableRowProps {
 
 const DataTableRow: FunctionComponent<DataTableRowProps> = ({
   item,
-  columns
+  columns,
 }) => {
   return (
     <>
@@ -40,15 +40,19 @@ const DataTableRow: FunctionComponent<DataTableRowProps> = ({
 interface DataTableProps {
   data: TODO[] | null;
   columns: readonly ColumnDefinition[];
+  sortKey?: string | null;
+  sortDirection?: 'ascending' | 'descending';
   handleColumnClick?: (
-    sortKey: string
+    sortKey: string,
   ) => (event: MouseEvent | TouchEvent) => void;
 }
 
 const DataTable: FunctionComponent<DataTableProps> = ({
   data,
   columns,
-  handleColumnClick
+  sortKey,
+  sortDirection,
+  handleColumnClick,
 }) => {
   return (
     <StyledTable>
@@ -56,6 +60,9 @@ const DataTable: FunctionComponent<DataTableProps> = ({
         {columns.map(({ key, alias }) => (
           <StyledHeadCell
             key={key}
+            className={
+              key === sortKey ? `is-sort-key is-${sortDirection}` : undefined
+            }
             onClick={handleColumnClick ? handleColumnClick(key) : undefined}
           >
             {alias ?? key}

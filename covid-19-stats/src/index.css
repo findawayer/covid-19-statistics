@@ -2,7 +2,7 @@
 @import-normalize;
 
 body {
-  margin: 20px;
+  margin: 1rem;
   font-family: 'Noto Serif KR', serif;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

@@ -9,7 +9,8 @@ import Search from './Search';
 import {
   StyledCovidStatHeader,
   StyledCovidStatTitle,
-  StyledCovidStatBody
+  StyledCovidStatBody,
+  StyledCovidStatScroll,
 } from './styles/CovidStatistics';
 
 const API_ALL_COUNTRY = 'https://covid19-api.com/country/all';
@@ -32,32 +33,35 @@ const columns = [
   { key: 'confirmed', alias: '확진자' },
   { key: 'recovered', alias: '완치자' },
   { key: 'critical', alias: '치명적' },
-  { key: 'deaths', alias: '사망자' }
+  { key: 'deaths', alias: '사망자' },
 ];
 
 const CovidStatTable: FunctionComponent = () => {
   const { data, loading, error } = useFetch<CountryData[]>(
     API_ALL_COUNTRY,
-    { cacheKey: 'covid19-country-all', cacheMaxAge: 60 * 60 * 1000 } // 1 hour cache
+    { cacheKey: 'covid19-country-all', cacheMaxAge: 60 * 60 * 1000 }, // 1 hour cache
   );
   const {
     processedData,
+    dataOptions: { sortKey, sortDirection },
     handleColumnClick,
-    handleKeywordChange
+    handleKeywordChange,
   } = useTabularData(data, {
     filterKey: 'country',
     sortKey: 'country',
-    sortDirection: 'ascending'
+    sortDirection: 'ascending',
   });
 
   const renderTable = () => {
-    if (loading) return <Loading isCentered />;
+    if (loading) return <Loading />;
     if (error) return <p>{error.message}</p>;
     if (!data) return <p>No data!</p>;
     return (
       <DataTable
         data={processedData}
         columns={columns}
+        sortKey={sortKey}
+        sortDirection={sortDirection}
         handleColumnClick={handleColumnClick}
       />
     );
@@ -69,7 +73,9 @@ const CovidStatTable: FunctionComponent = () => {
         <StyledCovidStatTitle>코로나 바이러스 세계 현황</StyledCovidStatTitle>
         <Search handleChange={handleKeywordChange} />
       </StyledCovidStatHeader>
-      <StyledCovidStatBody>{renderTable()}</StyledCovidStatBody>
+      <StyledCovidStatBody>
+        <StyledCovidStatScroll>{renderTable()}</StyledCovidStatScroll>
+      </StyledCovidStatBody>
     </>
   );
 };

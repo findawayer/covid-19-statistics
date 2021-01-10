@@ -2,7 +2,7 @@ const DEFAULT_FUNCTION_CALL_RATE_LIMIT = 100;
 
 export function throttle(
   fn: (...args: any[]) => void,
-  limit = DEFAULT_FUNCTION_CALL_RATE_LIMIT
+  limit = DEFAULT_FUNCTION_CALL_RATE_LIMIT,
 ) {
   let lastCall: number;
   let lastTimeoutId: number;
@@ -27,7 +27,7 @@ export function throttle(
 
 export function debounce(
   fn: (...args: any[]) => void,
-  limit = DEFAULT_FUNCTION_CALL_RATE_LIMIT
+  limit = DEFAULT_FUNCTION_CALL_RATE_LIMIT,
 ) {
   let lastTimeoutId: number;
 

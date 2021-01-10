@@ -21,14 +21,14 @@ const DEFAULT_SORT_DIRECTION: SortDirection = 'descending';
 /** Tabular data */
 export const useTabularData = (
   rowData: Record<string, TODO>[] | null,
-  options: Partial<DataOptions> = {}
+  options: Partial<DataOptions> = {},
 ) => {
   const [dataOptions, setDataOptions] = useState<DataOptions>({
     filterKey: null,
     filterKeyword: null,
     sortKey: null,
     sortDirection: DEFAULT_SORT_DIRECTION,
-    ...options
+    ...options,
   });
 
   /** Processed table data (sorted, filtered and memoized.) */
@@ -48,7 +48,7 @@ export const useTabularData = (
 
   /** Sort data on clicking on column headings.  */
   const handleColumnClick = (sortKey: string) => (
-    event: MouseEvent | TouchEvent
+    event: MouseEvent | TouchEvent,
   ) => {
     // Just in case the heading is an interactive element, e.g. <a />
     event.preventDefault();
@@ -57,13 +57,13 @@ export const useTabularData = (
       if (previousOptions.sortKey === sortKey) {
         return {
           ...previousOptions,
-          sortDirection: flipDirection(previousOptions.sortDirection)
+          sortDirection: flipDirection(previousOptions.sortDirection),
         };
       }
       return {
         ...previousOptions,
         sortKey,
-        sortDirection: DEFAULT_SORT_DIRECTION
+        sortDirection: DEFAULT_SORT_DIRECTION,
       };
     });
   };
@@ -74,14 +74,15 @@ export const useTabularData = (
 
     setDataOptions(previousOptions => ({
       ...previousOptions,
-      filterKeyword: value || null
+      filterKeyword: value || null,
     }));
   };
 
   return {
     processedData,
+    dataOptions,
     handleColumnClick,
-    handleKeywordChange
+    handleKeywordChange,
   };
 };
 
@@ -91,7 +92,7 @@ function flipDirection(direction: SortDirection): SortDirection {
 
 function filterData<T extends Record<string, unknown>>(
   data: T[],
-  options: Pick<DataOptions, 'filterKey' | 'filterKeyword'>
+  options: Pick<DataOptions, 'filterKey' | 'filterKeyword'>,
 ): T[] {
   const { filterKey, filterKeyword } = options;
   // Return the data as-is, if no filtering option is set.
@@ -104,7 +105,7 @@ function filterData<T extends Record<string, unknown>>(
 
 function sortData<T extends Record<string, unknown>>(
   data: T[],
-  options: Pick<DataOptions, 'sortKey' | 'sortDirection'>
+  options: Pick<DataOptions, 'sortKey' | 'sortDirection'>,
 ): T[] {
   const { sortKey, sortDirection } = options;
   // Return the data as-is, if no sort option is set.

@@ -21,7 +21,7 @@ type FetchResult = {
 const initialResult: FetchResult = {
   data: null,
   loading: true,
-  error: null
+  error: null,
 };
 
 /** Action for fetchResultReducer */
@@ -33,7 +33,7 @@ type Action =
 /** Update `fetchResult` object based on the action type. */
 const fetchResultReducer = (
   status: FetchResult,
-  action: Action
+  action: Action,
 ): FetchResult => {
   switch (action.type) {
     case 'setError':
@@ -61,15 +61,15 @@ type UseFetchOptions = {
  */
 export const useFetch = <T extends JsonData>(
   uri: string,
-  { cacheKey, cacheMaxAge }: UseFetchOptions = {}
+  { cacheKey, cacheMaxAge }: UseFetchOptions = {},
 ) => {
   const [{ data, loading, error }, dispatch] = useReducer(
     fetchResultReducer,
-    initialResult
+    initialResult,
   );
   const cacheRef = useRef({
     key: cacheKey,
-    timestamp: 0
+    timestamp: 0,
   });
 
   // Fetch data.
