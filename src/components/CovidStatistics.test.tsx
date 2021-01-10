@@ -53,24 +53,37 @@ describe('<CovidStatistics />', () => {
       expect(getByText(/South Korea/)).toBeInTheDocument();
     });
 
-    it('filters data when search field receives a value', async () => {
-      const { getByPlaceholderText, queryByText } = render(<CovidStatistics />);
-      // Enter search keyword
+    it('filters data when search field receives a value (South Korea)', async () => {
+      const { getByPlaceholderText, getByTestId, queryByText } = render(
+        <CovidStatistics />,
+      );
+      // Enter search keyword 'K'
       const searchField = getByPlaceholderText('국가로 검색');
       userEvent.type(searchField, 'K');
-      // Monglia - unmatches
-      // South Korea - matches
-      // Taiwan - unmatches
+      // Mongolia is filtered out
       await waitFor(() => expect(queryByText('Mongolia')).toBeNull());
-      expect(queryByText('South Korea')).toBeInTheDocument();
-      expect(queryByText('Taiwan')).toBeNull();
+      expect(getByTestId('tbody')).toMatchSnapshot();
     });
 
-    // it('sorts data when column heading is clicked', async () => {
-    //   const { getByTestId, queryByText } = render(<CovidStatistics />);
-    //   // Click country
-    //   userEvent.click(getByTestId('country'));
-    //   await waitFor(() => expect(queryByText('Taiwan')).toBeInTheDocument());
-    // });
+    it('sorts data upside down when the active column heading is clicked (Taiwan, South Korea, Mongolia)', async () => {
+      const { getByTestId } = render(<CovidStatistics />);
+      // Click country
+      userEvent.click(getByTestId('country'));
+      expect(getByTestId('tbody')).toMatchSnapshot();
+    });
+
+    it('reverts data order back to original when same column is clicked twice (Mongolia, South Korea, Taiwan)', async () => {
+      const { getByTestId } = render(<CovidStatistics />);
+      // Double click country
+      userEvent.dblClick(getByTestId('country'));
+      expect(getByTestId('tbody')).toMatchSnapshot();
+    });
+
+    it('sorts data in descending direction when a column heading is clicked (South Korea, Monglia, Taiwan)', async () => {
+      const { getByTestId } = render(<CovidStatistics />);
+      // Click country
+      userEvent.click(getByTestId('confirmed'));
+      expect(getByTestId('tbody')).toMatchSnapshot();
+    });
   });
 });

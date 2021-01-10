@@ -1,0 +1,299 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CovidStatistics /> with data filters data when search field receives a value (South Korea) 1`] = `
+<tbody
+  data-testid="tbody"
+>
+  <tr>
+    <td
+      class="css-1g8ku9a"
+    >
+      South Korea
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      68,664
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      50,409
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      401
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      1,125
+    </td>
+  </tr>
+</tbody>
+`;
+
+exports[`<CovidStatistics /> with data reverts data order back to original when same column is clicked twice (Mongolia, South Korea, Taiwan) 1`] = `
+<tbody
+  data-testid="tbody"
+>
+  <tr>
+    <td
+      class="css-1g8ku9a"
+    >
+      Mongolia
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      1,429
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      896
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      14
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      2
+    </td>
+  </tr>
+  <tr>
+    <td
+      class="css-1g8ku9a"
+    >
+      South Korea
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      68,664
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      50,409
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      401
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      1,125
+    </td>
+  </tr>
+  <tr>
+    <td
+      class="css-1g8ku9a"
+    >
+      Taiwan
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      828
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      720
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      0
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      7
+    </td>
+  </tr>
+</tbody>
+`;
+
+exports[`<CovidStatistics /> with data sorts data in descending direction when a column heading is clicked (South Korea, Monglia, Taiwan) 1`] = `
+<tbody
+  data-testid="tbody"
+>
+  <tr>
+    <td
+      class="css-1g8ku9a"
+    >
+      South Korea
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      68,664
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      50,409
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      401
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      1,125
+    </td>
+  </tr>
+  <tr>
+    <td
+      class="css-1g8ku9a"
+    >
+      Mongolia
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      1,429
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      896
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      14
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      2
+    </td>
+  </tr>
+  <tr>
+    <td
+      class="css-1g8ku9a"
+    >
+      Taiwan
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      828
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      720
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      0
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      7
+    </td>
+  </tr>
+</tbody>
+`;
+
+exports[`<CovidStatistics /> with data sorts data upside down when the active column heading is clicked (Taiwan, South Korea, Mongolia) 1`] = `
+<tbody
+  data-testid="tbody"
+>
+  <tr>
+    <td
+      class="css-1g8ku9a"
+    >
+      Taiwan
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      828
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      720
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      0
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      7
+    </td>
+  </tr>
+  <tr>
+    <td
+      class="css-1g8ku9a"
+    >
+      South Korea
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      68,664
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      50,409
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      401
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      1,125
+    </td>
+  </tr>
+  <tr>
+    <td
+      class="css-1g8ku9a"
+    >
+      Mongolia
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      1,429
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      896
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      14
+    </td>
+    <td
+      class="css-1g8ku9a"
+    >
+      2
+    </td>
+  </tr>
+</tbody>
+`;

@@ -57,7 +57,7 @@ const DataTable: FunctionComponent<DataTableProps> = ({
 }) => {
   return (
     <StyledTable>
-      <thead>
+      <thead data-testid="thead">
         <tr>
           {columns.map(({ key, alias }) => (
             <StyledHeadCell
@@ -74,7 +74,7 @@ const DataTable: FunctionComponent<DataTableProps> = ({
           ))}
         </tr>
       </thead>
-      <tbody>
+      <tbody data-testid="tbody">
         {data &&
           data.map(item => (
             <DataTableRow key={item[idKey]} item={item} columns={columns} />
