@@ -3,10 +3,9 @@ import React from 'react';
 
 import { formatValue } from '../utils';
 import {
-  StyledBody,
   StyledCell,
-  StyledHead,
   StyledHeadCell,
+  StyledSortIcon,
   StyledTable,
 } from './styles/DataTable';
 
@@ -27,11 +26,11 @@ const DataTableRow: FunctionComponent<DataTableRowProps> = ({
   columns,
 }) => {
   return (
-    <>
+    <tr>
       {columns.map(({ key }) => (
         <StyledCell key={key}>{formatValue(item[key])}</StyledCell>
       ))}
-    </>
+    </tr>
   );
 };
 
@@ -58,26 +57,29 @@ const DataTable: FunctionComponent<DataTableProps> = ({
 }) => {
   return (
     <StyledTable>
-      <StyledHead>
-        {columns.map(({ key, alias }) => (
-          <StyledHeadCell
-            key={key}
-            className={
-              key === sortKey ? `is-sort-key is-${sortDirection}` : undefined
-            }
-            onClick={handleColumnClick ? handleColumnClick(key) : undefined}
-            data-testid={key}
-          >
-            {alias ?? key}
-          </StyledHeadCell>
-        ))}
-      </StyledHead>
-      <StyledBody>
+      <thead>
+        <tr>
+          {columns.map(({ key, alias }) => (
+            <StyledHeadCell
+              key={key}
+              onClick={handleColumnClick ? handleColumnClick(key) : undefined}
+              data-testid={key}
+            >
+              {alias ?? key}
+              <StyledSortIcon
+                isActive={key === sortKey}
+                isAscending={sortDirection === 'ascending'}
+              />
+            </StyledHeadCell>
+          ))}
+        </tr>
+      </thead>
+      <tbody>
         {data &&
           data.map(item => (
             <DataTableRow key={item[idKey]} item={item} columns={columns} />
           ))}
-      </StyledBody>
+      </tbody>
     </StyledTable>
   );
 };
