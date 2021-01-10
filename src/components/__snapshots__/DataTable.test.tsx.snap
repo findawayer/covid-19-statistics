@@ -1,0 +1,70 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<DataTable /> should render data as table 1`] = `
+<div>
+  <div
+    class="css-oj7r1c"
+  >
+    <div
+      class="css-fbqqf5"
+    >
+      <div
+        class="is-sort-key is-descending css-1pydu5g"
+        data-testid="name"
+      >
+        이름
+      </div>
+      <div
+        class="css-1pydu5g"
+        data-testid="size"
+      >
+        크기
+      </div>
+    </div>
+    <div
+      class="css-qsfcw0"
+    >
+      <div
+        class="css-pcezah"
+      >
+        foo
+      </div>
+      <div
+        class="css-pcezah"
+      >
+        10
+      </div>
+      <div
+        class="css-pcezah"
+      >
+        bar
+      </div>
+      <div
+        class="css-pcezah"
+      >
+        500
+      </div>
+      <div
+        class="css-pcezah"
+      >
+        baz
+      </div>
+      <div
+        class="css-pcezah"
+      >
+        1,000
+      </div>
+      <div
+        class="css-pcezah"
+      >
+        qux
+      </div>
+      <div
+        class="css-pcezah"
+      >
+        1,000,000
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -40,6 +40,7 @@ const DataTableRow: FunctionComponent<DataTableRowProps> = ({
 interface DataTableProps {
   data: TODO[] | null;
   columns: readonly ColumnDefinition[];
+  idKey: string;
   sortKey?: string | null;
   sortDirection?: 'ascending' | 'descending';
   handleColumnClick?: (
@@ -50,6 +51,7 @@ interface DataTableProps {
 const DataTable: FunctionComponent<DataTableProps> = ({
   data,
   columns,
+  idKey,
   sortKey,
   sortDirection,
   handleColumnClick,
@@ -64,6 +66,7 @@ const DataTable: FunctionComponent<DataTableProps> = ({
               key === sortKey ? `is-sort-key is-${sortDirection}` : undefined
             }
             onClick={handleColumnClick ? handleColumnClick(key) : undefined}
+            data-testid={key}
           >
             {alias ?? key}
           </StyledHeadCell>
@@ -72,7 +75,7 @@ const DataTable: FunctionComponent<DataTableProps> = ({
       <StyledBody>
         {data &&
           data.map(item => (
-            <DataTableRow key={item.country} item={item} columns={columns} />
+            <DataTableRow key={item[idKey]} item={item} columns={columns} />
           ))}
       </StyledBody>
     </StyledTable>

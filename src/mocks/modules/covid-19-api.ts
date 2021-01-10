@@ -1,0 +1,40 @@
+import type { CovidCountryStat } from '../../models/covid-19-api';
+
+export const covidCountryStatMock: CovidCountryStat[] = [
+  {
+    code: 'KR',
+    confirmed: 68664,
+    country: 'South Korea',
+    critical: 401,
+    deaths: 1125,
+    lastChange: '2021-01-10T06:16:39+01:00',
+    lastUpdate: '2021-01-10T09:30:04+01:00',
+    latitude: 35.907757,
+    longitude: 127.766922,
+    recovered: 50409,
+  },
+  {
+    code: 'MN',
+    confirmed: 1429,
+    country: 'Mongolia',
+    critical: 14,
+    deaths: 2,
+    lastChange: '2021-01-10T06:24:51+01:00',
+    lastUpdate: '2021-01-10T09:30:04+01:00',
+    latitude: 46.862496,
+    longitude: 103.846656,
+    recovered: 896,
+  },
+  {
+    code: 'TW',
+    confirmed: 828,
+    country: 'Taiwan',
+    critical: 0,
+    deaths: 7,
+    lastChange: '2021-01-09T07:15:52+01:00',
+    lastUpdate: '2021-01-10T09:30:04+01:00',
+    latitude: 23.69781,
+    longitude: 120.960515,
+    recovered: 720,
+  },
+];

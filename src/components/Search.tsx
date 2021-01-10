@@ -13,7 +13,7 @@ const Search: FunctionComponent<SearchProps> = ({ handleChange }) => {
     <StyledSearch
       type="search"
       placeholder="국가로 검색"
-      onChange={debounce(handleChange, 300)}
+      onChange={debounce(handleChange)}
     />
   );
 };

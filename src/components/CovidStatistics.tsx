@@ -4,7 +4,7 @@ import React from 'react';
 import { API_COVID_19_ALL_COUNTRY } from '../config/api';
 import { useFetch } from '../hooks/useFetch';
 import { useTabularData } from '../hooks/useTabularData';
-import type { CountryData } from '../models/covid-19-api';
+import type { CovidCountryStat } from '../models/covid-19-api';
 import DataTable from './DataTable';
 import Loading from './Loading';
 import Search from './Search';
@@ -24,7 +24,7 @@ const columns = [
 ];
 
 const CovidStatTable: FunctionComponent = () => {
-  const { data, loading, error } = useFetch<CountryData[]>(
+  const { data, loading, error } = useFetch<CovidCountryStat[]>(
     API_COVID_19_ALL_COUNTRY,
     { cacheKey: 'covid19-country-all', cacheMaxAge: 60 * 60 * 1000 }, // 1 hour cache
   );
@@ -47,6 +47,7 @@ const CovidStatTable: FunctionComponent = () => {
       <DataTable
         data={processedData}
         columns={columns}
+        idKey="country"
         sortKey={sortKey}
         sortDirection={sortDirection}
         handleColumnClick={handleColumnClick}

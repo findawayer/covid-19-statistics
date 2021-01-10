@@ -1,4 +1,4 @@
-export type CountryData = {
+export type CovidCountryStat = {
   country: string;
   code: string;
   confirmed: number;

@@ -85,7 +85,7 @@ export const useFetch = <T extends JsonData>(
           ? await readCache(cacheRef.current.key!, request)
           : null;
       // Otherwise, fetch new data.
-      const response = cachedResponse ?? (await fetch(request));
+      const response = cachedResponse ?? (await fetch(uri));
       // Something went wrong x(
       if (!response.ok) {
         const error = new Error(`Request failed: ${uri}`);

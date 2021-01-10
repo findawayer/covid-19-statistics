@@ -1,6 +1,14 @@
 function canUseCache(): boolean {
-  // eslint-disable-next-line no-restricted-globals
-  return 'caches' in self;
+  return 'caches' in window;
+}
+
+export async function readCache(
+  key: string,
+  request: Request,
+): Promise<Response | undefined | null> {
+  if (!canUseCache()) return null;
+  const cache = await window.caches.open(key);
+  return cache.match(request);
 }
 
 export async function writeCache(
@@ -12,13 +20,4 @@ export async function writeCache(
   const cache = await window.caches.open(key);
   cache.put(request, response);
   return true;
-}
-
-export async function readCache(
-  key: string,
-  request: Request,
-): Promise<Response | undefined | null> {
-  if (!canUseCache()) return null;
-  const cache = await window.caches.open(key);
-  return cache.match(request);
 }
