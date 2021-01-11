@@ -1,13 +1,17 @@
 import type { FunctionComponent, MouseEvent, TouchEvent } from 'react';
 import React from 'react';
 
-import { formatValue } from '../utils';
+import { toReadableString } from '../utils';
 import {
   StyledCell,
   StyledHeadCell,
   StyledSortIcon,
   StyledTable,
 } from './styles/DataTable';
+
+type TabularDataEntry = {
+  [prop: string]: string | number | boolean | null;
+};
 
 type ColumnDefinition = {
   key: string;
@@ -17,7 +21,7 @@ type ColumnDefinition = {
 // Row --------------------
 
 interface DataTableRowProps {
-  item: TODO;
+  item: TabularDataEntry;
   columns: readonly ColumnDefinition[];
 }
 
@@ -28,7 +32,7 @@ const DataTableRow: FunctionComponent<DataTableRowProps> = ({
   return (
     <tr>
       {columns.map(({ key }) => (
-        <StyledCell key={key}>{formatValue(item[key])}</StyledCell>
+        <StyledCell key={key}>{toReadableString(item[key])}</StyledCell>
       ))}
     </tr>
   );
@@ -37,7 +41,7 @@ const DataTableRow: FunctionComponent<DataTableRowProps> = ({
 // Table --------------------
 
 interface DataTableProps {
-  data: TODO[] | null;
+  data: TabularDataEntry[] | null;
   columns: readonly ColumnDefinition[];
   idKey: string;
   sortKey?: string | null;
@@ -77,7 +81,11 @@ const DataTable: FunctionComponent<DataTableProps> = ({
       <tbody data-testid="tbody">
         {data &&
           data.map(item => (
-            <DataTableRow key={item[idKey]} item={item} columns={columns} />
+            <DataTableRow
+              key={item[idKey] as string}
+              item={item}
+              columns={columns}
+            />
           ))}
       </tbody>
     </StyledTable>
